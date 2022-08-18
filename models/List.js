@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require('sequelize')
+const sequelize = require('../config/connection')
 
 class List extends Model {}
 
@@ -15,10 +15,10 @@ List.init(
         type: DataTypes.STRING,
         allowNull: false,
       },
-      item_id: {
+      user_id: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'item',
+          model: 'user',
           key: 'id',
         },
       },
@@ -31,4 +31,4 @@ List.init(
     }
   );
   
-  module.exports = List;
+  module.exports = List
