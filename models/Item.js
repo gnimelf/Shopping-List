@@ -27,3 +27,5 @@ Item.init(
     moduleName: 'item'
     }
 )
+
+module.exports = Item
