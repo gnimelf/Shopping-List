@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection");
 const bcrypt = require("bcrypt");
 const sequelize = require("../config/connection");
 
@@ -44,15 +43,16 @@ User.init(
             async beforeCreate(newUserData) {
                 newUserData.password = await bcrypt.hash(
                     newUserData.password,
-                    24
+                    10
                 );
                 return newUserData;
             },
         },
         sequelize,
+        timestamps: false,
+        onDelete: "CASCADE",
         freezeTableName: true,
         underscored: true,
-        onDelete: "CASCADE",
         modelName: "user",
     }
 );
