@@ -1,7 +1,7 @@
-const {Model, DataTypes} = require('sequelize')
-const sequelize = require('../config/connection')
+const { Model, DataTypes } = require("sequelize")
+const sequelize = require("../config/connection")
 
-class Item extends Model{}
+class Item extends Model {}
 
 Item.init(
     {
@@ -10,21 +10,28 @@ Item.init(
             primaryKey: true,
             allowNull: false,
             unique: true,
-            autoIncrement: true
+            autoIncrement: true,
         },
         item_name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
         item_cost: {
-            type: DataTypes.DECIMAL
-        }
+            type: DataTypes.DECIMAL,
+        },
+        table_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: "list",
+                key: "id",
+            },
+        },
     },
     {
-    sequelize,
-    freezeTableName: true,
-    underscored: true,
-    moduleName: 'item'
+        sequelize,
+        freezeTableName: true,
+        underscored: true,
+        moduleName: "item",
     }
 )
 
