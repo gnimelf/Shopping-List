@@ -23,6 +23,6 @@ const listData = [
     },
 ]
 
-const seedUser = () => List.bulkCreate(listData, {})
+const seeList = () => List.bulkCreate(listData, {})
 
-module.exports = seedUser
+module.exports = seeList
