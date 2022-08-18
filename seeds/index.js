@@ -8,9 +8,9 @@ const seedAll = async () => {
 
   await seedUsers()
 
-  await seedItems()
-
   await seedLists()
+ 
+  await seedItems()
 
   process.exit(0)
 }
