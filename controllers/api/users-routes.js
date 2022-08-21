@@ -17,6 +17,7 @@ router.post("/login", async (req, res) => {
             res.status(400).json({
                 message: "Incorrect email or password. Please try again!"
             })
+            console.log('email passed')
             return
         }
 
@@ -27,18 +28,19 @@ router.post("/login", async (req, res) => {
             res.status(400).json({
                 message: "Incorrect email or password. Please try again!"
             })
+            console.log('password passed')
             return
         }
-        
-        // Destructure user data to remove password
-        const {id, first_name, last_name, email} = dbUserData
 
         // Set session
         req.session.loggedIn = true
         req.session.userId = dbUserData.id
+    
 
-        // Send user data
-        res.send({id, first_name, last_name, email})
+        req.session.save(() => {
+            res.status(200).json({ message: "You are now logged in!" });
+        });
+
     } catch (err) {
         console.log(err)
         res.status(500)
