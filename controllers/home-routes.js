@@ -1,27 +1,23 @@
 const router = require("express").Router();
-const { User, List } = require("../models")
+const { User, List } = require("../models");
 
 // home route
 router.get("/", (req, res) => {
     try {
         // res.render("home")
-        res.render("home");
+        res.render("home", {
+            logged_in: req.session.loggedIn,
+        });
     } catch (err) {
         console.log(err);
         res.status(500);
     }
-})
-
+});
 
 // Login page route
 router.get("/login", (req, res) => {
-    try {
-        res.render('login')       
-    } catch (err) {
-        console.log(err);
-        res.status(500);
-    }
-})
+    res.render("login", {});
+});
 
 // User lists route
 router.get("/lists", async (req, res) => {
@@ -29,18 +25,27 @@ router.get("/lists", async (req, res) => {
         try {
             const dbListData = await List.findAll({
                 where: {
-                    user_id: req.session.userId
-                }
+                    user_id: req.session.userId,
+                },
             })
-            res.json(dbListData);
+
+            // serialize post data
+            const lists = dbListData.map((cleaningLists) =>
+                cleaningLists.get({ plain: true })
+            )
+
+            res.render("lists", {
+                lists,
+                logged_in: req.session.loggedIn,
+            })
         } catch (err) {
-            console.log(err);
-            res.status(500);
+            console.log(err)
+            res.status(500)
         }
     } else {
         res.redirect("/login")
     }
-})
+});
 
 // User signup route
 router.get("/signup", (req, res) => {
@@ -50,6 +55,6 @@ router.get("/signup", (req, res) => {
         console.log(err)
         res.status(500)
     }
-})
+});
 
-module.exports = router;
+module.exports = router
