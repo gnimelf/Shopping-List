@@ -47,25 +47,13 @@ router.post("/login", async (req, res) => {
     }
 })
 
-router.use("/logout", (req, res) => {
+router.post("/logout", (req, res) => {
     if (req.session.loggedIn){
        req.session.destroy(() => {
         res.send("You're logged out!").status(200).end()
     }) 
     } else {
         res.status(404).end()
-    }
-    
-})
-
-router.post("/logout", (req, res) => {
-    // When the user logs out, destroy the session
-    if (req.session.loggedIn) {
-        req.session.destroy(() => {
-            res.status(204).end();
-        });
-    } else {
-        res.status(404).end();
     }
 })
 
@@ -85,13 +73,14 @@ router.post("/signup", async (req, res) => {
         req.session.userId = newUser.id
 
         req.session.save(() => {
-        res.status(200).json({ message: "You are now logged in!" });
+        res.status(200).json({ message: "You are now logged in!" })
 
         });
     } catch (err) {
         console.log(err);
-        res.status(500).json(err);
+        res.status(500).json(err)
     }
 })
+
 
 module.exports = router
