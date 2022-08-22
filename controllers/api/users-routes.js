@@ -17,7 +17,7 @@ router.post("/login", async (req, res) => {
             res.status(400).json({
                 message: "Incorrect email or password. Please try again!"
             })
-            console.log('email passed')
+            // console.log('email passed')
             return
         }
 
@@ -58,28 +58,39 @@ router.use("/logout", (req, res) => {
     
 })
 
+router.post("/logout", (req, res) => {
+    // When the user logs out, destroy the session
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+    } else {
+        res.status(404).end();
+    }
+})
+
 router.post("/signup", async (req, res) => {
     try {
         
         // Create account
         const newUser = await User.create({
             email: req.body.email,
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
+            first_name: req.body.firstName,
+            last_name: req.body.lastName,
             password: req.body.password
         })
 
         // Set session
         req.session.loggedIn = true
-        req.session.userId = newUser
-        
+        req.session.userId = newUser.id
+
+        req.session.save(() => {
+        res.status(200).json({ message: "You are now logged in!" });
+
+        });
     } catch (err) {
-        
-    //     const errorList = {}
-    //    err.errors.map( e => {
-    //     errorList[e.path] = e.message
-    //    })
-    //     res.json(errorList).status(400)
+        console.log(err);
+        res.status(500).json(err);
     }
 })
 
