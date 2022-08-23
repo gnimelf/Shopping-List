@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const { List } = require('../../models')
 
-
 // Add list 
 router.post("/add", async (req, res) => {
     if (req.session.loggedIn){
@@ -10,7 +9,7 @@ router.post("/add", async (req, res) => {
                 list_name: req.body.listName,
                 user_id: req.body.listId
             })
-            res.status(200).json(newList);
+            res.status(200).json(newList)
         } catch (err) {
             console.log(err)
             res.status(500).json(err)
@@ -29,7 +28,7 @@ router.delete("/delete", async (req, res) => {
                     id: req.body.id
                 }
             })
-            res.status(200).json(deleteList);
+            res.status(200).json(deleteList)
         } catch (err) {
             console.log(err)
             res.status(500).json(err)

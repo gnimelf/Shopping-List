@@ -10,7 +10,7 @@ router.post("/add", async (req, res) => {
                 item_cost: req.body.itemCost,
                 list_id: req.body.listId
             })
-            res.status(200).json(newItem);
+            res.status(200).json(newItem)
         } catch (err) {
             console.log(err)
             res.status(500).json(err)
@@ -29,7 +29,7 @@ router.delete("/delete", async (req, res) => {
                     id: req.body.id
                 }
             })
-            res.status(200).json(deleteItem);
+            res.status(200).json(deleteItem)
         } catch (err) {
             console.log(err)
             res.status(500).json(err)
