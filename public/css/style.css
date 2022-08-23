@@ -1,0 +1,16 @@
+
+#logo {
+    font-size: 100px;
+    font-family: "Splash", cursive;
+}
+
+#addItemBtn {
+
+    border: 0;
+    color: white;
+    font-size: 25px;
+    border-radius: 50px;
+    margin: 20px 40%;
+}
+
+

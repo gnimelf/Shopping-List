@@ -1,0 +1,41 @@
+{{#if logged_in}}
+<div>
+    <button id="addItemBtn" class="button is-primary js-modal-trigger" data-target="modal-js-add">+</button>
+    <div class="columns">
+        {{#each lists as |list|}}
+        <div class="column col-md-10 offset-md-1 my-3">
+            <div class="card">
+                <div class="card-content">
+                    <a href="/list/{{list.id}}">
+                        <p class="title">{{list.list_name}}</p>
+                    </a>
+                    <br>
+                    <i id="{{list.id}}" class="fa-regular fa-trash-can"></i>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<div id="modal-js-add" class="modal">
+    <div class="modal-background"></div>
+
+    <div class="modal-content">
+        <div class="box">
+            <h1 class="title">Add Item</h1>
+            <form id="addlist-form">
+                <label for="listname">List Name:</label>
+                <input type="text" id="listname" name="listname"><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+</div>
+{{/if}}
+
+
+{{#if logged_in}}
+<script src="./js/lists.js"></script>
+{{/if}}

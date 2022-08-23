@@ -1,0 +1,44 @@
+<div id="listItems">
+    <h1 id="{{list.id}}" class="title has-text-centered">{{list.list_name}}</h1>
+    <button id="addItemBtn" class="button is-primary js-modal-trigger" data-target="modal-js-add">+</button>
+    <div class="table-container ">
+        <table class="table is-fullwidth">
+            <thead>
+                <tr>
+                    <th>ItemName</th>
+                    <th>Cost</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            {{#each list.items as |items|}}
+            <tr>
+                <td>{{items.item_name}}</td>
+                <td class="has-text-centered">{{items.item_cost}}</td>
+                <td class="has-text-centered"><i id="{{items.id}}" class="fa-regular fa-trash-can"></i></td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+</div>
+
+<div id="modal-js-add" class="modal">
+    <div class="modal-background"></div>
+
+    <div class="modal-content">
+        <div class="box">
+            <h1 class="title">Add Item</h1>
+            <form id="additem-form">
+                <label for="itemname">Item Name:</label>
+                <input type="text" id="itemname" name="itemname"><br><br>
+                <label for="itemcost">Item Cost:</label>
+                <input type="text" id="itemcost" name="itemcost"><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+{{#if logged_in}}
+<script src="../../js/list.js"></script>
+{{/if}}
