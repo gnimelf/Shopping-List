@@ -66,7 +66,8 @@ router.get("/list/:id", async (req, res) => {
                     logged_in: req.session.loggedIn,
                 });
             } else {
-                res.json({ message: "That is not your list" });
+                res.redirect("/lists")
+
             }
         } catch (err) {
             console.log(err);
