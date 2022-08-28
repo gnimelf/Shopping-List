@@ -9,7 +9,7 @@ const addItemHandler = async (event) => {
     const response = await fetch("/api/items/add", {
         method: "POST",
         body: JSON.stringify({ itemName, itemCost, listId }),
-        headers: { 'Content-Type': 'Application/json'}
+        headers: { 'Content-Type': 'Application/json' }
     });
 
     if (response.ok) {
@@ -18,6 +18,7 @@ const addItemHandler = async (event) => {
         alert(response.statusText);
     }
 };
+
 
 // Send DELETE request
 const deleteItemHandler = async (event) => {
@@ -34,6 +35,9 @@ const deleteItemHandler = async (event) => {
 
 // MODAL STUFF
 document.addEventListener("DOMContentLoaded", () => {
+
+    
+
     // Functions to open and close a modal
     function openModal($el) {
         $el.classList.add("is-active");
@@ -43,9 +47,20 @@ document.addEventListener("DOMContentLoaded", () => {
         $el.classList.remove("is-active");
     }
 
+    // Get total-cost cell
+    let totalCost = document.querySelector("#total-cost")
+    
+    // Get all item values
+    const itemValues = document.querySelectorAll("#item-cost")
+    let total = 0.0
+    for (let i = 0; i < itemValues.length; i++) {
+        total = total + parseFloat(itemValues[i].innerHTML)
+    }
+    totalCost.innerHTML = "$" + parseFloat(total)
+   
     document
-    .querySelector("#additem-form")
-    .addEventListener("submit", addItemHandler);
+        .querySelector("#additem-form")
+        .addEventListener("submit", addItemHandler);
 
     // Add a click event on buttons to open a specific modal
     (document.querySelectorAll(".js-modal-trigger") || []).forEach(
@@ -63,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     (
         document.querySelectorAll(".modal-background, .modal-close") || []
     ).forEach(($close) => {
-        const $target = $close.closest(".modal");
+        const $target = $close.closest(".modal")
 
         $close.addEventListener("click", () => {
             closeModal($target);
@@ -72,10 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Find all trash 
-const trashCan = document.querySelectorAll("i");
+const trashCan = document.querySelectorAll("i")
 for (let i = 0; i < trashCan.length; i++) {
     trashCan[i].addEventListener("click", deleteItemHandler);
 }
-
-
-

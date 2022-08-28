@@ -60,7 +60,6 @@ router.get("/list/:id", async (req, res) => {
                 // serialize post data
                 const list = listData.get({ plain: true });
                 // Use serilized data
-                console.log(list);
                 res.render("list", {
                     list,
                     logged_in: req.session.loggedIn,
